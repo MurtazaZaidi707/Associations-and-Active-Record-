@@ -1,0 +1,28 @@
+<h1><%= @author.name %></h1>
+
+
+<ul>
+  <li><%= link_to "Destroy", author_path(@author), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+<h2>Books</h2>
+<% @author.books.each do |book| %>
+  <p>
+    <strong>book:</strong>
+    <%= book.published_at %>
+  </p>
+<% end %>
+
+<h2>Add a book:</h2>
+<%= form_with model: [ @author, @author.books.build ] do |form| %>
+  <p>
+    <%= form.label :published_at %><br>
+    <%= form.date_field :published_at %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
